@@ -1,7 +1,6 @@
-import 'package:cinematics/appstrings/AppConstants.dart';
+import 'package:cinematics/appstrings/app_constants.dart';
 import 'package:cinematics/commonui/list_item.dart';
-import 'package:cinematics/commonui/list_item_poster.dart';
-import 'package:cinematics/ui/home/moviepage/HorizontalPaginationWidget.dart';
+import 'package:cinematics/ui/home/moviepage/horizontal_pagination_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

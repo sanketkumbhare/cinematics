@@ -4,11 +4,11 @@ import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../apimodule/ApiService.dart';
-import '../../appstrings/AppConstants.dart';
+import '../../apimodule/api_service.dart';
+import '../../appstrings/app_constants.dart';
 import '../../model/castResponse/Cast.dart';
-import '../personDetail/PersonDetail.dart';
-import 'TvDetail.dart';
+import '../personDetail/person_detail.dart';
+import 'tv_detail.dart';
 
 class TvDetailController extends GetxController{
   late TvResult tvResult;

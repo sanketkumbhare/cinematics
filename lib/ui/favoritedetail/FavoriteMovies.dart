@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinematics/ui/FavoriteDetail/FavoriteController.dart';
 import 'package:cinematics/commonui/list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../appstrings/AppConstants.dart';
 
 Widget getMovieList(FavoriteController controller, String tabValue) {
   return Obx(() => ListView.builder(

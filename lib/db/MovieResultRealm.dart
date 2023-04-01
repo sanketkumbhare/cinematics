@@ -1,7 +1,6 @@
+import 'package:cinematics/db/realminit/initDb.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:realm/realm.dart';
-
-import 'RealmInitialisation/initDb.dart';
 
 part 'MovieResultRealm.g.dart';
 

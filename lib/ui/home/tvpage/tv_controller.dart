@@ -1,11 +1,11 @@
 
-import 'package:cinematics/appstrings/AppConstants.dart';
+import 'package:cinematics/appstrings/app_constants.dart';
 import 'package:cinematics/model/TvResponse/TvResult.dart';
-import 'package:cinematics/ui/tvdetail/TvDetail.dart';
+import 'package:cinematics/ui/tvdetail/tv_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../apimodule/ApiService.dart';
+import '../../../apimodule/api_service.dart';
 
 
 

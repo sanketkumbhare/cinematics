@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinematics/commonui/text_widget.dart';
-import 'package:cinematics/ui/personDetail/PersonController.dart';
+import 'package:cinematics/ui/personDetail/person_controller.dart';
 import 'package:cinematics/util/util.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../appstrings/AppConstants.dart';
+import '../../appstrings/app_constants.dart';
 import '../../commonui/list_item_poster.dart';
 
 class PersonDetail extends StatelessWidget {

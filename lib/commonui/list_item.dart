@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../appstrings/AppConstants.dart';
+import '../appstrings/app_constants.dart';
 
 Widget listItemMovies(
     BuildContext context, String backdropPath, String title) {

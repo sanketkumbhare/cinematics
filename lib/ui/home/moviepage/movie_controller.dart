@@ -1,9 +1,9 @@
-import 'package:cinematics/apimodule/ApiService.dart';
-import 'package:cinematics/ui/moviedetail/MovieDetail.dart';
+import 'package:cinematics/apimodule/api_service.dart';
+import 'package:cinematics/ui/moviedetail/movie_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../appstrings/AppConstants.dart';
+import '../../../appstrings/app_constants.dart';
 import '../../../model/movieResponse/Results.dart';
 
 class MovieController extends GetxController {

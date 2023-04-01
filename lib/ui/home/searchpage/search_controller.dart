@@ -1,13 +1,11 @@
-import 'package:cinematics/model/personResponse/PersonResponse.dart';
 import 'package:cinematics/model/searchresponse/SearchResult.dart';
-import 'package:cinematics/ui/personDetail/PersonDetail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import '../../../apimodule/ApiService.dart';
+import '../../../apimodule/api_service.dart';
 import '../../../model/TvResponse/TvResult.dart';
 import '../../../model/movieResponse/Results.dart';
-import '../../moviedetail/MovieDetail.dart';
-import '../../tvdetail/TvDetail.dart';
+import '../../moviedetail/movie_detail.dart';
+import '../../tvdetail/tv_detail.dart';
 
 class SearchController extends GetxController {
   var textFieldValue = RxnString("");

@@ -1,14 +1,13 @@
-import 'package:cinematics/appstrings/AppConstants.dart';
+import 'package:cinematics/appstrings/app_constants.dart';
 import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:cinematics/model/castResponse/Cast.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/model/personMovieResponse/ActedInMovies.dart';
 import 'package:cinematics/model/personResponse/PersonResponse.dart';
-import 'package:cinematics/ui/moviedetail/MovieDetail.dart';
-import 'package:cinematics/ui/tvdetail/TvDetail.dart';
+import 'package:cinematics/ui/tvdetail/tv_detail.dart';
 import 'package:get/get.dart';
 
-import '../../apimodule/ApiService.dart';
+import '../../apimodule/api_service.dart';
 
 class PersonController extends GetxController {
   late Cast cast;

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../db/TvResultRealm/TelevisionResultRealm.dart';
-import '../moviedetail/MovieDetail.dart';
-import '../tvdetail/TvDetail.dart';
+import '../moviedetail/movie_detail.dart';
+import '../tvdetail/tv_detail.dart';
 
 class FavoriteController extends GetxController with GetSingleTickerProviderStateMixin{
   

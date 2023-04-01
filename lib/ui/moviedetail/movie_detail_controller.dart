@@ -1,20 +1,17 @@
-import 'package:cinematics/appstrings/AppConstants.dart';
+import 'package:cinematics/appstrings/app_constants.dart';
 import 'package:cinematics/model/castResponse/Cast.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
-import 'package:cinematics/ui/personDetail/PersonDetail.dart';
+import 'package:cinematics/ui/personDetail/person_detail.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../apimodule/ApiService.dart';
+import '../../apimodule/api_service.dart';
 import '../../db/MovieResultRealm.dart';
-import '../../db/RealmInitialisation/initDb.dart';
-import '../home/moviepage/movie_controller.dart';
-import 'MovieDetail.dart';
+import '../../db/realminit/initDb.dart';
+import 'movie_detail.dart';
 
 class MovieDetailController extends GetxController {
-
-
   late Results movieResult;
 
   final _similarMovieList = RxList<Results>();
@@ -24,23 +21,23 @@ class MovieDetailController extends GetxController {
   var savedClicked = false.obs;
   var movieItem = Results().obs;
 
-
-  List<Results> getSimilarMovieList(){
+  List<Results> getSimilarMovieList() {
     return _similarMovieList;
   }
 
-  List<Cast> getCastList(){
+  List<Cast> getCastList() {
     return _castList;
   }
 
-  RxList<YoutubeResult> getYoutubeList(){
+  RxList<YoutubeResult> getYoutubeList() {
     return _youtubeList;
   }
 
-  void setArguments(){
-    movieResult = Get.arguments;
+  void setArguments() {
+   movieResult =  Get.arguments;
     fetchAll(movieResult.id.toString());
   }
+
   void fetchSimilarMovieList(String type, String movieId) async {
     try {
       var list = await ApiService().getSimilarMovieList(type, movieId);
@@ -120,7 +117,6 @@ class MovieDetailController extends GetxController {
   void addMovie(Results movieResults) {
     addItem(movieResults);
   }
-
 
   @override
   void onClose() {

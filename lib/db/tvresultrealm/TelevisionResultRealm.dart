@@ -1,6 +1,8 @@
-import 'package:cinematics/db/RealmInitialisation/initDb.dart';
+
 import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:realm/realm.dart';
+
+import '../realminit/initDb.dart';
 
 part 'TelevisionResultRealm.g.dart';
 

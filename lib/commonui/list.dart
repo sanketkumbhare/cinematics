@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinematics/model/TvResponse/TvResult.dart';
-import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:flutter/material.dart';
 
-import '../appstrings/AppConstants.dart';
+import '../appstrings/app_constants.dart';
 
 Widget listItems(BuildContext context, String posterPath , String title, String overview) {
   return SizedBox(

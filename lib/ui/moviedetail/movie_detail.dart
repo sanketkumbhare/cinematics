@@ -1,8 +1,8 @@
 
-import 'package:cinematics/ui/moviedetail/MovieDetailController.dart';
+import 'package:cinematics/ui/moviedetail/movie_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../appstrings/AppConstants.dart';
+import '../../appstrings/app_constants.dart';
 import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 

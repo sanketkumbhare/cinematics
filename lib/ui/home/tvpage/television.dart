@@ -1,12 +1,11 @@
 import 'package:cinematics/commonui/list_item.dart';
-import 'package:cinematics/commonui/list_item_poster.dart';
 import 'package:cinematics/ui/home/tvpage/tv_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../appstrings/AppConstants.dart';
+import '../../../appstrings/app_constants.dart';
 import '../../../commonui/text_widget.dart';
-import 'HorizontalPaginationTvWidget.dart';
+import 'horizonatal_pagination_tv_widget.dart';
 
 class Televisions extends StatelessWidget {
   Televisions({Key? key}) : super(key: key);
