@@ -10,7 +10,6 @@ import 'package:cinematics/model/searchresponse/searchBaseResponse.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResponse.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
 import 'package:flutter/material.dart';
-import '../appstrings/AppConstants.dart';
 import '../model/castResponse/Cast.dart';
 import '../model/movieResponse/BaseResponse.dart';
 import 'package:http/http.dart' as http;

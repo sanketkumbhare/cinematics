@@ -5,13 +5,14 @@ import 'package:get/get.dart';
 import 'home_controller.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+   Home({Key? key}) : super(key: key);
+
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    HomeController homeController = Get.put(HomeController());
-    return GetMaterialApp(
-      home: Scaffold(
+
+    return Scaffold(
 
           body: Obx(
             () => IndexedStack(
@@ -46,7 +47,6 @@ class Home extends StatelessWidget {
                   )
                 ],
               ))
-          ),
     );
   }
 }

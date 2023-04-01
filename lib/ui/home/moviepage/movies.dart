@@ -9,11 +9,13 @@ import '../../../commonui/text_widget.dart';
 import 'movie_controller.dart';
 
 class Movies extends StatelessWidget {
-  const Movies({Key? key}) : super(key: key);
+   Movies({Key? key}) : super(key: key);
+
+  final MovieController movieController = Get.put(MovieController());
 
   @override
   Widget build(BuildContext context) {
-    MovieController movieController = Get.put(MovieController());
+
 
     return MaterialApp(
         home: Scaffold(

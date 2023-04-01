@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinematics/ui/moviedetail/MovieDetailController.dart';
 import 'package:cinematics/ui/tvdetail/TvDetailController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,18 +8,19 @@ import '../../appstrings/AppConstants.dart';
 import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 
-class TvDetail extends GetView<TvDetailController> {
+class TvDetail extends StatelessWidget {
   final String tagValue;
-  const TvDetail(this.tagValue, {Key? key}) : super(key: key);
-  @override
-  // TODO: implement tag
+  late TvDetailController controller;
+
   String? get tag => tagValue;
+
+  TvDetail(this.tagValue, {Key? key}) : super(key: key){
+    controller = Get.put(TvDetailController(),tag: tagValue);
+  }
 
   @override
   Widget build(BuildContext context) {
-    Get.put(TvDetailController(),tag: tagValue);
-    controller.tvResult = Get.arguments;
-    controller.fetchAll(controller.tvResult.id.toString());
+    controller.getArguments();
     return MaterialApp(
       home: Scaffold(
         body: NestedScrollView(

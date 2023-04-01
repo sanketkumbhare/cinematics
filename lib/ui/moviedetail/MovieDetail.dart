@@ -6,15 +6,19 @@ import '../../appstrings/AppConstants.dart';
 import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 
-class MovieDetail extends GetView<MovieDetailController> {
+class MovieDetail extends StatelessWidget {
   final String tagVal;
-  const MovieDetail(this.tagVal, {Key? key}) : super(key: key);
+  late MovieDetailController controller;
+
   @override
   String? get tag => tagVal;
 
+  MovieDetail(this.tagVal, {Key? key}) : super(key: key){
+     controller = Get.put(MovieDetailController(), tag: tagVal);
+  }
+
   @override
   Widget build(BuildContext context) {
-    Get.put(MovieDetailController(), tag: tagVal);
     controller.setArguments();
     return MaterialApp(
       home: Scaffold(

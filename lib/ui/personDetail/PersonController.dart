@@ -77,4 +77,11 @@ class PersonController extends GetxController {
       Get.to( TvDetail("${DateTime.now().millisecondsSinceEpoch}"),arguments: value,fullscreenDialog: true,preventDuplicates: false);
     }
   }
+
+  void fetchAll(){
+    cast = Get.arguments['cast'];
+    results = Get.arguments['movieResult'];
+    tvResult = Get.arguments['tvResult'];
+    fetchData(cast.id.toString());
+  }
 }

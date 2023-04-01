@@ -18,6 +18,8 @@ class TvDetailController extends GetxController{
   var onTapItem = false.obs;
   var savedClicked = false.obs;
 
+  get controller => null;
+
   void fetchCastList(String type, String movieId,String variant) async {
     try {
       var list = await ApiService().getCastList(movieId, type, variant);
@@ -61,7 +63,7 @@ class TvDetailController extends GetxController{
   void routeToPersonDetail(Cast cast, TvResult movieResult) {
     onTapItem.value = false;
     var arguments = {"cast": cast, "tvResult": movieResult};
-    Get.to(const PersonDetail(), arguments: arguments);
+    Get.to(PersonDetail(), arguments: arguments);
   }
 
   void addTv(TvResult tvResult){
@@ -75,6 +77,11 @@ class TvDetailController extends GetxController{
     } else {
       savedClicked.value = false;
     }
+  }
+
+  void getArguments(){
+    tvResult = Get.arguments;
+    fetchAll(tvResult.id.toString());
   }
 
   void fetchAll(String id){

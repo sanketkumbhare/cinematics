@@ -9,7 +9,7 @@ import '../tvpage/television.dart';
 class HomeController extends GetxController {
   var pageIndex = 0.obs;
 
-  final pages = [const Movies(), const Televisions(), FavoriteScreen(),const Search()];
+  final pages = [ Movies(),  Televisions(), FavoriteScreen(), Search()];
 
   void updatePageIndex(int value){
     pageIndex.value = value;

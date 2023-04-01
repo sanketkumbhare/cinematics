@@ -8,12 +8,13 @@ import '../../../appstrings/AppConstants.dart';
 import '../../../commonui/text_widget.dart';
 import 'HorizontalPaginationTvWidget.dart';
 
-class Televisions extends GetView<TelevisionController> {
-  const Televisions({Key? key}) : super(key: key);
+class Televisions extends StatelessWidget {
+  Televisions({Key? key}) : super(key: key);
+
+  final TelevisionController controller = Get.put(TelevisionController());
 
   @override
   Widget build(BuildContext context) {
-    Get.put(TelevisionController());
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -39,24 +40,27 @@ class Televisions extends GetView<TelevisionController> {
                             itemCount: controller.tvAiringTodayList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return InkWell(
-                                onTap: ()=>{
+                                onTap: () => {
                                   controller.onTapItem.value = true,
-                                  controller.detailScreenRoute(controller.tvAiringTodayList[index])
+                                  controller.detailScreenRoute(
+                                      controller.tvAiringTodayList[index])
                                 },
-                                child: listItemMovies(context,
-                                    controller.tvAiringTodayList[index].backdropPath.toString(),
-                                    controller.tvAiringTodayList[index].name.toString()),
+                                child: listItemMovies(
+                                    context,
+                                    controller
+                                        .tvAiringTodayList[index].backdropPath
+                                        .toString(),
+                                    controller.tvAiringTodayList[index].name
+                                        .toString()),
                               );
                             },
                           ),
                         ),
                       ),
-
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 10,
                       ),
-
                       Container(
                         alignment: Alignment.centerLeft,
                         margin: const EdgeInsets.only(left: 10),
@@ -64,63 +68,48 @@ class Televisions extends GetView<TelevisionController> {
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.22,
-                        child: Obx(
-                              () => horizontalPaginationTvWidget(
-                                  context,
-                                  controller.tvTopRatedList,
-                                  controller.topRatedTvListOffset,
-                                  controller.controllerTopRatedTv,
-                                  controller
-                              )
-                        ),
+                        child: Obx(() => horizontalPaginationTvWidget(
+                            context,
+                            controller.tvTopRatedList,
+                            controller.topRatedTvListOffset,
+                            controller.controllerTopRatedTv,
+                            controller)),
                       ),
-
-
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 10,
                       ),
-
                       Container(
                         alignment: Alignment.centerLeft,
                         margin: const EdgeInsets.only(left: 10),
-                        child:  getTextWidget(textPopularTv),
+                        child: getTextWidget(textPopularTv),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.22,
-                        child: Obx(
-                              () => horizontalPaginationTvWidget(
-                                context,
-                                controller.tvPopularList,
-                                controller.popularTvListOffset,
-                                controller.controllerPopularTv,
-                                controller
-                              )
-                        ),
+                        child: Obx(() => horizontalPaginationTvWidget(
+                            context,
+                            controller.tvPopularList,
+                            controller.popularTvListOffset,
+                            controller.controllerPopularTv,
+                            controller)),
                       ),
-
-
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 10,
                       ),
-
                       Container(
                         alignment: Alignment.centerLeft,
                         margin: const EdgeInsets.only(left: 10),
-                        child:  getTextWidget(textOnAirTv),
+                        child: getTextWidget(textOnAirTv),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.22,
-                        child: Obx(
-                              () => horizontalPaginationTvWidget(
-                                  context,
-                                  controller.tvOnAirList,
-                                  controller.tvAirListOffset,
-                                  controller.controllerTvAir,
-                                  controller
-                              )
-                        ),
+                        child: Obx(() => horizontalPaginationTvWidget(
+                            context,
+                            controller.tvOnAirList,
+                            controller.tvAirListOffset,
+                            controller.controllerTvAir,
+                            controller)),
                       ),
                     ],
                   ),

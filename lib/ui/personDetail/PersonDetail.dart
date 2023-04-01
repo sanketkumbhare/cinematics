@@ -9,16 +9,14 @@ import 'package:get/get.dart';
 import '../../appstrings/AppConstants.dart';
 import '../../commonui/list_item_poster.dart';
 
-class PersonDetail extends GetView<PersonController> {
-  const PersonDetail({Key? key}) : super(key: key);
+class PersonDetail extends StatelessWidget {
+   PersonDetail({Key? key}) : super(key: key);
+
+  final PersonController controller = Get.put(PersonController());
 
   @override
   Widget build(BuildContext context) {
-    Get.put(PersonController());
-    controller.cast = Get.arguments['cast'];
-    controller.results = Get.arguments['movieResult'];
-    controller.tvResult = Get.arguments['tvResult'];
-    controller.fetchData(controller.cast.id.toString());
+    controller.fetchAll();
     return MaterialApp(
       home: Scaffold(
         body: SingleChildScrollView(

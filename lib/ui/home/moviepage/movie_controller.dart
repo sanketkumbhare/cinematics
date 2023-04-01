@@ -1,6 +1,5 @@
 import 'package:cinematics/apimodule/ApiService.dart';
 import 'package:cinematics/ui/moviedetail/MovieDetail.dart';
-import 'package:cinematics/ui/moviedetail/MovieDetailController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

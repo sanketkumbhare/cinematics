@@ -91,7 +91,7 @@ class MovieDetailController extends GetxController {
   void routeToPersonDetail(Cast cast, Results movieResult) {
     onTapItem.value = false;
     var arguments = {"cast": cast, "movieResult": movieResult};
-    Get.to(const PersonDetail(), arguments: arguments);
+    Get.to(PersonDetail(), arguments: arguments);
   }
 
   void detailScreen(Results value) {

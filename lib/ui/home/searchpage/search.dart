@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 
 import '../../../commonui/list.dart';
 
-class Search extends GetView<SearchController> {
-  const Search({Key? key}) : super(key: key);
+class Search extends StatelessWidget {
+  Search({Key? key}) : super(key: key);
+
+  final SearchController controller = Get.put(SearchController());
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SearchController());
+
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
