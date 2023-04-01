@@ -121,6 +121,7 @@ class MovieDetailController extends GetxController {
     addItem(movieResults);
   }
 
+
   @override
   void onClose() {
     super.onClose();
