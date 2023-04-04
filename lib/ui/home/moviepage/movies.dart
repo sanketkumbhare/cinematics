@@ -16,8 +16,7 @@ class Movies extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return MaterialApp(
-        home: Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         title: Text("TMDB guide"),
       ),
@@ -124,6 +123,6 @@ class Movies extends StatelessWidget {
                 ),
         ),
       ),
-    ));
+    );
   }
 }

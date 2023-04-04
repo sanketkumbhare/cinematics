@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
           body: Obx(
             () => IndexedStack(
               index: homeController.pageIndex.value,
-              children: homeController.pages,
+              children: homeController.getPages(),
             ),
           ),
           bottomNavigationBar: Obx(() => BottomNavigationBar(
