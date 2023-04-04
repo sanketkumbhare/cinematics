@@ -4,15 +4,17 @@ import 'package:cinematics/model/castResponse/Cast.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/model/personMovieResponse/ActedInMovies.dart';
 import 'package:cinematics/model/personResponse/PersonResponse.dart';
+import 'package:cinematics/ui/personDetail/person_required_argument.dart';
 import 'package:cinematics/ui/tvdetail/tv_detail.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../apimodule/api_service.dart';
 
 class PersonController extends GetxController {
   late Cast cast;
-  late Results results;
-  late TvResult tvResult;
+  late Results? results;
+  late TvResult? tvResult;
 
   var personDetail = PersonResponse().obs;
   var movieList = RxList<ActedInMovies>();
@@ -56,11 +58,11 @@ class PersonController extends GetxController {
   }
 
 
-  String getBackdropPath() {
+  String? getBackdropPath() {
     if (results != null) {
-      return results.backdropPath.toString();
+      return results?.backdropPath.toString();
     } else {
-      return tvResult.backdropPath.toString();
+      return tvResult?.backdropPath.toString();
     }
   }
 
@@ -77,10 +79,13 @@ class PersonController extends GetxController {
     }
   }
 
-  void fetchAll(){
-    cast = Get.arguments['cast'];
-    results = Get.arguments['movieResult'];
-    tvResult = Get.arguments['tvResult'];
+  void fetchAll(BuildContext context){
+    // cast = Get.arguments['cast'];
+    RequiredArgumentPersonDetail? personDetail =   ModalRoute.of(context)?.settings.arguments as RequiredArgumentPersonDetail;
+    cast =  personDetail.cast!;
+    results = personDetail.results;//Get.arguments['movieResult'];
+    tvResult = personDetail.tvResult;//Get.arguments['tvResult'];
     fetchData(cast.id.toString());
+
   }
 }

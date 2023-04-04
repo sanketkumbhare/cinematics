@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../apimodule/api_service.dart';
 import '../../../model/TvResponse/TvResult.dart';
 import '../../../model/movieResponse/Results.dart';
+import '../../../util/app_routes.dart';
 import '../../moviedetail/movie_detail.dart';
 import '../../tvdetail/tv_detail.dart';
 
@@ -64,13 +65,15 @@ class SearchController extends GetxController {
         });
   }
 
-  void detailScreen(SearchResult searchResult) {
+  void detailScreen(SearchResult searchResult,BuildContext context) {
     if (searchResult.mediaType == MediaType.MOVIE) {
-      Get.to(MovieDetail("${DateTime.now().millisecondsSinceEpoch}"),
-          arguments: convertToMovieModel(searchResult),
-          fullscreenDialog: true,
-          preventDuplicates: false);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: convertToMovieModel(searchResult));
     }
+    //   Get.to(MovieDetail(),
+    //       arguments: convertToMovieModel(searchResult),
+    //       fullscreenDialog: true,
+    //       preventDuplicates: false);
+    // }
 
     if (searchResult.mediaType == MediaType.TV) {
       Get.to(TvDetail("${DateTime.now().millisecondsSinceEpoch}"),

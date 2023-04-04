@@ -16,7 +16,7 @@ class PersonDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchAll();
+    controller.fetchAll(context);
     return MaterialApp(
       home: Scaffold(
         body: SingleChildScrollView(
@@ -72,7 +72,7 @@ class PersonDetail extends StatelessWidget {
                     data: IconThemeData(color: Colors.white, size: 25),
                     child: Icon(Icons.arrow_back),
                   ),
-                  onPressed: () => {Get.back()},
+                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
                 ),
               ),
               Container(

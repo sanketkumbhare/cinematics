@@ -7,19 +7,16 @@ import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 
 class MovieDetail extends StatelessWidget {
-  final String tagVal;
   late MovieDetailController controller;
 
-  @override
-  String? get tag => tagVal;
 
-  MovieDetail(this.tagVal, {Key? key}) : super(key: key){
-     controller = Get.put(MovieDetailController(), tag: tagVal);
+  MovieDetail({Key? key}) : super(key: key){
+     controller = Get.put(MovieDetailController(), tag: DateTime.now().millisecondsSinceEpoch.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.setArguments();
+    controller.setArguments(context);
     return MaterialApp(
       home: Scaffold(
         body: NestedScrollView(
@@ -73,7 +70,7 @@ class MovieDetail extends StatelessWidget {
                     )),
                 leading: IconButton(
                   icon: const Icon(Icons.chevron_left),
-                  onPressed: () => {Get.back()},
+                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
                 ),
                 actions: [
                   Obx(() => controller.savedClicked.value == false
@@ -138,7 +135,7 @@ class MovieDetail extends StatelessWidget {
                                   controller.onTapItem.value = true,
                                   controller.routeToPersonDetail(
                                       controller.getCastList()[index],
-                                      controller.movieResult)
+                                      controller.movieResult,context)
                                 },
                                 child: Hero(
                                   tag: "animate${controller.getCastList()[index].id}",
@@ -170,7 +167,7 @@ class MovieDetail extends StatelessWidget {
                                 controller.onTapItem.value = true;
                                 controller.detailScreen(
                                     controller
-                                        .getSimilarMovieList()[index]);
+                                        .getSimilarMovieList()[index],context);
                               },
                               child: listItemPosterMovies(
                                   context,

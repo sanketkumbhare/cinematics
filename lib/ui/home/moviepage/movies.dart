@@ -47,7 +47,7 @@ class Movies extends StatelessWidget {
                                   movieController.onTapItem.value = true,
                                   movieController.detailScreenRoute(
                                       movieController
-                                          .movieNowPlayingList[index])
+                                          .movieNowPlayingList[index],context)
                                 },
                                 child: listItemMovies(
                                     context,

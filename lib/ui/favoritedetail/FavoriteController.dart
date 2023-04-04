@@ -1,3 +1,4 @@
+
 import 'package:cinematics/db/MovieResultRealm.dart';
 import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../db/TvResultRealm/TelevisionResultRealm.dart';
-import '../moviedetail/movie_detail.dart';
+import '../../util/app_routes.dart';
 import '../tvdetail/tv_detail.dart';
 
 class FavoriteController extends GetxController with GetSingleTickerProviderStateMixin{
@@ -49,11 +50,10 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
       Get.to( TvDetail("${DateTime.now().millisecondsSinceEpoch}"),arguments: value,fullscreenDialog: true,preventDuplicates: false);
     }
   }
-  void detailScreen(Results value) {
+  void detailScreen(Results value, BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
-      Get.to(MovieDetail("${DateTime.now().millisecondsSinceEpoch}"),
-          arguments: value, fullscreenDialog: true, preventDuplicates: false);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
     }
   }
 

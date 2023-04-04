@@ -3,12 +3,15 @@ import 'package:cinematics/model/castResponse/Cast.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
 import 'package:cinematics/ui/personDetail/person_detail.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../apimodule/api_service.dart';
 import '../../db/MovieResultRealm.dart';
 import '../../db/realminit/initDb.dart';
+import '../../util/app_routes.dart';
+import '../personDetail/person_required_argument.dart';
 import 'movie_detail.dart';
 
 class MovieDetailController extends GetxController {
@@ -33,8 +36,8 @@ class MovieDetailController extends GetxController {
     return _youtubeList;
   }
 
-  void setArguments() {
-   movieResult =  Get.arguments;
+  void setArguments(BuildContext context) {
+    movieResult =   ModalRoute.of(context)?.settings.arguments as Results;
     fetchAll(movieResult.id.toString());
   }
 
@@ -85,19 +88,19 @@ class MovieDetailController extends GetxController {
     launchUrl(Uri.parse(YOUTUBE_WATCH_BASE_URL + key.toString()));
   }
 
-  void routeToPersonDetail(Cast cast, Results movieResult) {
+  void routeToPersonDetail(Cast cast, Results movieResult,BuildContext context) {
     onTapItem.value = false;
-    var arguments = {"cast": cast, "movieResult": movieResult};
-    Get.to(PersonDetail(), arguments: arguments);
+    Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.personDetail,arguments: RequiredArgumentPersonDetail(cast,movieResult,null));
   }
 
-  void detailScreen(Results value) {
+  void detailScreen(Results value,BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
       print("tapped");
       // dispose();
-      Get.to(MovieDetail("${DateTime.now().millisecondsSinceEpoch}"),
-          arguments: value, fullscreenDialog: true, preventDuplicates: false);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
+      // Get.to(MovieDetail(),
+      //     arguments: value, fullscreenDialog: true, preventDuplicates: false);
     }
   }
 

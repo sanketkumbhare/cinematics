@@ -15,7 +15,7 @@ Widget getMovieList(FavoriteController controller, String tabValue) {
             ? InkWell(
           onTap: (){
             controller.onTapItem.value = true;
-            controller.detailScreen(controller.movieList[index]!);
+            controller.detailScreen(controller.movieList[index]!,context);
           },
               child: listItems(
                   context,

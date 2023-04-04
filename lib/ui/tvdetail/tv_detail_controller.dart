@@ -1,6 +1,10 @@
 import 'package:cinematics/db/TvResultRealm/TelevisionResultRealm.dart';
 import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
+import 'package:cinematics/util/app_routes.dart';
+import 'package:cinematics/util/util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -8,6 +12,7 @@ import '../../apimodule/api_service.dart';
 import '../../appstrings/app_constants.dart';
 import '../../model/castResponse/Cast.dart';
 import '../personDetail/person_detail.dart';
+import '../personDetail/person_required_argument.dart';
 import 'tv_detail.dart';
 
 class TvDetailController extends GetxController{
@@ -60,10 +65,10 @@ class TvDetailController extends GetxController{
     launchUrl(Uri.parse(YOUTUBE_WATCH_BASE_URL + key.toString()));
   }
 
-  void routeToPersonDetail(Cast cast, TvResult movieResult) {
+  void routeToPersonDetail(Cast cast, TvResult movieResult, BuildContext context) {
     onTapItem.value = false;
-    var arguments = {"cast": cast, "tvResult": movieResult};
-    Get.to(PersonDetail(), arguments: arguments);
+   // var args = {"cast": cast, "tvResult": movieResult};
+    Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.personDetail,arguments: RequiredArgumentPersonDetail(cast,null,tvResult));
   }
 
   void addTv(TvResult tvResult){

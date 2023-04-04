@@ -72,7 +72,7 @@ class TvDetail extends StatelessWidget {
                     )),
                 leading: IconButton(
                   icon: const Icon(Icons.chevron_left),
-                  onPressed: () => {Get.back()},
+                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
                 ),
                 actions: [
                   Obx(
@@ -134,7 +134,7 @@ class TvDetail extends StatelessWidget {
                           onTap: () => {
                             controller.onTapItem.value = true,
                             controller.routeToPersonDetail(
-                                controller.castList[index], controller.tvResult)
+                                controller.castList[index], controller.tvResult,context)
                           },
                           child: listItemPosterMovies(
                               context, controller.castList[index].profilePath.toString()),

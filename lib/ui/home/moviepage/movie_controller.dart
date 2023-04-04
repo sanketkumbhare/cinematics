@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../appstrings/app_constants.dart';
 import '../../../model/movieResponse/Results.dart';
+import '../../../util/app_routes.dart';
 
 class MovieController extends GetxController {
   var movieNowPlayingList = <Results>[].obs;
@@ -42,11 +43,10 @@ class MovieController extends GetxController {
     }
   }
 
-  void detailScreenRoute(Results value) {
+  void detailScreenRoute(Results value,BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
-      String tag = "${DateTime.now().millisecondsSinceEpoch}";
-      Get.to(MovieDetail(tag), arguments: value, fullscreenDialog: true);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
     }
   }
 

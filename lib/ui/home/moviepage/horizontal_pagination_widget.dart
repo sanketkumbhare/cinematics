@@ -31,7 +31,7 @@ Widget  horizontalPaginationWidget(BuildContext context , List<Results> movieLis
                 onTap: () => {
                   movieController.onTapItem.value = true,
                   movieController.detailScreenRoute(
-                      movieList[index])
+                      movieList[index],context)
                 },
                 child: listItemPosterMovies(
                     context,

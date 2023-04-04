@@ -44,7 +44,7 @@ class Search extends StatelessWidget {
                                     controller.onTap.value == true;
                                     print("tapped");
                                     controller.detailScreen(
-                                        controller.searchList[index]);
+                                        controller.searchList[index],context);
                                   },
                                   child: listItems(
                                       context,
