@@ -2,24 +2,20 @@ import 'package:cinematics/db/TvResultRealm/TelevisionResultRealm.dart';
 import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
 import 'package:cinematics/util/app_routes.dart';
-import 'package:cinematics/util/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../apimodule/api_service.dart';
 import '../../appstrings/app_constants.dart';
 import '../../model/castResponse/Cast.dart';
-import '../personDetail/person_detail.dart';
 import '../personDetail/person_required_argument.dart';
-import 'tv_detail.dart';
 
 class TvDetailController extends GetxController{
   late TvResult tvResult;
-  var castList = RxList<Cast>();
-  var youtubeList = RxList<YoutubeResult>();
-  var similarTvList = RxList<TvResult>();
+  var castList = <Cast>[].obs;
+  var youtubeList = <YoutubeResult>[].obs;
+  var similarTvList = <TvResult>[].obs;
   var onTapItem = false.obs;
   var savedClicked = false.obs;
 
@@ -84,8 +80,8 @@ class TvDetailController extends GetxController{
     }
   }
 
-  void getArguments(){
-    tvResult = Get.arguments;
+  void getArguments(BuildContext context){
+    tvResult = ModalRoute.of(context)?.settings.arguments as TvResult;
     fetchAll(tvResult.id.toString());
   }
 
@@ -96,10 +92,10 @@ class TvDetailController extends GetxController{
     getTvResult(id);
   }
 
-  void detailTvScreenRoute(TvResult value){
+  void detailTvScreenRoute(TvResult value,BuildContext context){
     if(onTapItem.value == true){
       onTapItem.value = false;
-      Get.to( TvDetail("${DateTime.now().millisecondsSinceEpoch}"),arguments: value,fullscreenDialog: true,preventDuplicates: false);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
     }
   }
 

@@ -1,5 +1,8 @@
 import 'package:cinematics/ui/FavoriteDetail/FavoriteController.dart';
 import 'package:cinematics/ui/FavoriteDetail/Favorites.dart';
+import 'package:cinematics/ui/moviedetail/movie_detail.dart';
+import 'package:cinematics/ui/moviedetail/movie_detail_controller.dart';
+import 'package:cinematics/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../moviepage/movies.dart';
@@ -15,6 +18,7 @@ class HomeController extends GetxController {
     Future.delayed(const Duration(milliseconds: 100), () {
       if (value == 2) {
         Get.find<FavoriteController>().fetchData();
+        Get.find<MovieDetailController>(tag: tagGlobal).callEmpty();
       }
     });
 

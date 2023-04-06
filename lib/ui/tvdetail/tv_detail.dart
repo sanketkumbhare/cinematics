@@ -8,18 +8,15 @@ import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 
 class TvDetail extends StatelessWidget {
-  final String tagValue;
   late TvDetailController controller;
 
-  String? get tag => tagValue;
-
-  TvDetail(this.tagValue, {Key? key}) : super(key: key){
-    controller = Get.put(TvDetailController(),tag: tagValue);
+  TvDetail({Key? key}) : super(key: key){
+    controller = Get.put(TvDetailController(),tag: DateTime.now().millisecondsSinceEpoch.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.getArguments();
+    controller.getArguments(context);
     return MaterialApp(
       home: Scaffold(
         body: NestedScrollView(
@@ -162,7 +159,7 @@ class TvDetail extends StatelessWidget {
                         return InkWell(
                           onTap: () => {
                             controller.onTapItem.value = true,
-                            controller.detailTvScreenRoute(controller.similarTvList[index])
+                            controller.detailTvScreenRoute(controller.similarTvList[index],context)
                           },
                           child: listItemPosterMovies(
                               context,

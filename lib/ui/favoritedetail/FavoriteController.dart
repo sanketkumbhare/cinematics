@@ -12,8 +12,8 @@ import '../tvdetail/tv_detail.dart';
 class FavoriteController extends GetxController with GetSingleTickerProviderStateMixin{
   
   late TabController tabController;
-  var movieList = RxList<Results?>();
-  var tvList = RxList<TvResult?>();
+  var movieList = <Results?>[].obs;
+  var tvList = <TvResult?>[].obs;
   var index = 0.obs;
   var onTapItem = false.obs;
 
@@ -44,10 +44,10 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
     _getTvList();
   }
 
-  void detailTvScreenRoute(TvResult value){
+  void detailTvScreenRoute(TvResult value,BuildContext context){
     if(onTapItem.value == true){
       onTapItem.value = false;
-      Get.to( TvDetail("${DateTime.now().millisecondsSinceEpoch}"),arguments: value,fullscreenDialog: true,preventDuplicates: false);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
     }
   }
   void detailScreen(Results value, BuildContext context) {

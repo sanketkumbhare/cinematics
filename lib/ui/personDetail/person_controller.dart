@@ -6,10 +6,12 @@ import 'package:cinematics/model/personMovieResponse/ActedInMovies.dart';
 import 'package:cinematics/model/personResponse/PersonResponse.dart';
 import 'package:cinematics/ui/personDetail/person_required_argument.dart';
 import 'package:cinematics/ui/tvdetail/tv_detail.dart';
+import 'package:cinematics/util/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../apimodule/api_service.dart';
+import '../../util/util.dart';
 
 class PersonController extends GetxController {
   late Cast cast;
@@ -17,8 +19,8 @@ class PersonController extends GetxController {
   late TvResult? tvResult;
 
   var personDetail = PersonResponse().obs;
-  var movieList = RxList<ActedInMovies>();
-  var tvList = RxList<ActedInMovies>();
+  var movieList = <ActedInMovies>[].obs;
+  var tvList = <ActedInMovies>[].obs;
   var onTapItem = false.obs;
 
   void fetchPersonDetail(String type, String movieId) async {
@@ -57,7 +59,6 @@ class PersonController extends GetxController {
     }
   }
 
-
   String? getBackdropPath() {
     if (results != null) {
       return results?.backdropPath.toString();
@@ -72,20 +73,32 @@ class PersonController extends GetxController {
     fetchActedInTvShows(tvCredits, personId);
   }
 
-  void detailTvScreenRoute(TvResult value){
-    if(onTapItem.value == true){
+  void detailTvScreenRoute(ActedInMovies value, BuildContext context) {
+    if (onTapItem.value == true) {
       onTapItem.value = false;
-      Get.to( TvDetail("${DateTime.now().millisecondsSinceEpoch}"),arguments: value,fullscreenDialog: true,preventDuplicates: false);
+
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(AppRoutes.tvDetail, arguments: convertToTvModels(value));
     }
   }
 
-  void fetchAll(BuildContext context){
-    // cast = Get.arguments['cast'];
-    RequiredArgumentPersonDetail? personDetail =   ModalRoute.of(context)?.settings.arguments as RequiredArgumentPersonDetail;
-    cast =  personDetail.cast!;
-    results = personDetail.results;//Get.arguments['movieResult'];
-    tvResult = personDetail.tvResult;//Get.arguments['tvResult'];
-    fetchData(cast.id.toString());
+  void detailMovieScreenRoute(ActedInMovies value, BuildContext context) {
+    if (onTapItem.value == true) {
+      onTapItem.value = false;
+      Navigator.of(context, rootNavigator: true).pushNamed(
+          AppRoutes.movieDetail,
+          arguments: convertToMovieModels(value));
+    }
+  }
 
+  void fetchAll(BuildContext context) {
+    // cast = Get.arguments['cast'];
+    RequiredArgumentPersonDetail? personDetail = ModalRoute.of(context)
+        ?.settings
+        .arguments as RequiredArgumentPersonDetail;
+    cast = personDetail.cast!;
+    results = personDetail.results; //Get.arguments['movieResult'];
+    tvResult = personDetail.tvResult; //Get.arguments['tvResult'];
+    fetchData(cast.id.toString());
   }
 }

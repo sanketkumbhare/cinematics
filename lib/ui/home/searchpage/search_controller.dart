@@ -5,13 +5,14 @@ import '../../../apimodule/api_service.dart';
 import '../../../model/TvResponse/TvResult.dart';
 import '../../../model/movieResponse/Results.dart';
 import '../../../util/app_routes.dart';
+import '../../../util/util.dart';
 import '../../moviedetail/movie_detail.dart';
 import '../../tvdetail/tv_detail.dart';
 
 class SearchController extends GetxController {
-  var textFieldValue = RxnString("");
+  var textFieldValue = "".obs;
   var isLoading = false.obs;
-  var searchList = RxList<SearchResult>();
+  var searchList = <SearchResult>[].obs;
   var focusNode = FocusNode();
   var onTap = false.obs;
   var pageCount = 1;
@@ -76,35 +77,13 @@ class SearchController extends GetxController {
     // }
 
     if (searchResult.mediaType == MediaType.TV) {
-      Get.to(TvDetail("${DateTime.now().millisecondsSinceEpoch}"),
-          arguments: convertToTvModel(searchResult),
-          fullscreenDialog: true,
-          preventDuplicates: false);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: convertToTvModel(searchResult));
     }
   }
-}
 
-Results convertToMovieModel(SearchResult searchResult) {
-  return Results(
-      adult: searchResult.adult,
-      backdropPath: searchResult.backdropPath,
-      genreIds: searchResult.genreIds,
-      id: searchResult.id,
-      title: searchResult.title,
-      originalLanguage: searchResult.originalLanguage,
-      originalTitle: searchResult.originalTitle,
-      overview: searchResult.overview,
-      posterPath: searchResult.posterPath);
-}
-
-TvResult convertToTvModel(SearchResult searchResult) {
-  return TvResult(
-      backdropPath: searchResult.backdropPath,
-      genreIds: searchResult.genreIds,
-      id: searchResult.id,
-      originalLanguage: searchResult.originalLanguage,
-      originalName: searchResult.originalName,
-      overview: searchResult.overview,
-      name: searchResult.name,
-      posterPath: searchResult.posterPath);
+  @override
+  void onClose() {
+    super.onClose();
+    scrollController.dispose();
+  }
 }

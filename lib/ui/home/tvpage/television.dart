@@ -41,7 +41,7 @@ class Televisions extends StatelessWidget {
                               onTap: () => {
                                 controller.onTapItem.value = true,
                                 controller.detailScreenRoute(
-                                    controller.tvAiringTodayList[index])
+                                    controller.tvAiringTodayList[index],context)
                               },
                               child: listItemMovies(
                                   context,

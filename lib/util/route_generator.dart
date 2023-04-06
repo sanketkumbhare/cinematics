@@ -18,10 +18,13 @@ class RouteGenerator {
       case AppRoutes.movieDetail:
         return MaterialPageRoute(
             builder: (context) => MovieDetail(), settings: settings);
+      case AppRoutes.tvDetail:
+        return MaterialPageRoute(
+            builder: (context) => TvDetail(), settings: settings);
       case AppRoutes.splash:
-        return MaterialPageRoute(builder: (context) => SplashScreenApp());
+        return MaterialPageRoute(builder: (context) => const SplashScreenApp());
       default:
-        return MaterialPageRoute(builder: (context) => SplashScreenApp());
+        return MaterialPageRoute(builder: (context) => const SplashScreenApp());
     }
   }
 }

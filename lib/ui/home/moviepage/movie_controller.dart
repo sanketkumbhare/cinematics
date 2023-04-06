@@ -136,4 +136,11 @@ class MovieController extends GetxController {
       }
     });
   }
+  @override
+  void onClose() {
+    super.onClose();
+    controllerUpcomingMovies.dispose();
+    controllerTopMovies.dispose();
+    controllerPopularMovies.dispose();
+  }
 }

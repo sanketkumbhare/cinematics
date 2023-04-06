@@ -2,6 +2,7 @@
 import 'package:cinematics/appstrings/app_constants.dart';
 import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:cinematics/ui/tvdetail/tv_detail.dart';
+import 'package:cinematics/util/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -10,11 +11,11 @@ import '../../../apimodule/api_service.dart';
 
 
 class TelevisionController extends GetxController {
-  var tvAiringTodayList = RxList<TvResult>();
+  var tvAiringTodayList = <TvResult>[].obs;
   var tvOnAirList = <TvResult>[].obs;
   var tvTopRatedList = <TvResult>[].obs;
   var tvPopularList = <TvResult>[].obs;
-  var isLoading = RxBool(true);
+  var isLoading = false.obs;
   var onTapItem = true.obs;
   var isLoadingPagination = false.obs;
 
@@ -104,10 +105,10 @@ class TelevisionController extends GetxController {
     }
   }
 
-  void detailScreenRoute(TvResult value){
+  void detailScreenRoute(TvResult value,BuildContext context){
     if(onTapItem.value == true){
       onTapItem.value = false;
-      Get.to( TvDetail("${DateTime.now().millisecondsSinceEpoch}"),arguments: value,fullscreenDialog: true);
+      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
     }
   }
 
@@ -145,5 +146,12 @@ class TelevisionController extends GetxController {
         fetchOnAirTvList(onAir,pageCountTvAir.value);
       }
     });
+  }
+  @override
+  void onClose() {
+    super.onClose();
+    controllerTvAir.dispose();
+    controllerTopRatedTv.dispose();
+    controllerTopRatedTv.dispose();
   }
 }

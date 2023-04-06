@@ -2,27 +2,26 @@ import 'package:cinematics/appstrings/app_constants.dart';
 import 'package:cinematics/model/castResponse/Cast.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
-import 'package:cinematics/ui/personDetail/person_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../apimodule/api_service.dart';
 import '../../db/MovieResultRealm.dart';
-import '../../db/realminit/initDb.dart';
 import '../../util/app_routes.dart';
+import '../../util/util.dart';
 import '../personDetail/person_required_argument.dart';
-import 'movie_detail.dart';
 
 class MovieDetailController extends GetxController {
   late Results movieResult;
 
-  final _similarMovieList = RxList<Results>();
-  final _castList = RxList<Cast>();
-  final _youtubeList = RxList<YoutubeResult>();
+  final _similarMovieList = <Results>[].obs;
+  final _castList = <Cast>[].obs;
+  final _youtubeList = <YoutubeResult>[].obs;
   var onTapItem = false.obs;
   var savedClicked = false.obs;
   var movieItem = Results().obs;
+  var tag = "";
 
   List<Results> getSimilarMovieList() {
     return _similarMovieList;
@@ -96,11 +95,7 @@ class MovieDetailController extends GetxController {
   void detailScreen(Results value,BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
-      print("tapped");
-      // dispose();
       Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
-      // Get.to(MovieDetail(),
-      //     arguments: value, fullscreenDialog: true, preventDuplicates: false);
     }
   }
 
@@ -121,9 +116,22 @@ class MovieDetailController extends GetxController {
     addItem(movieResults);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    disposeRealm();
+@override
+  void dispose() {
+    super.dispose();
+    Get.delete<MovieDetailController>(tag: tag);
+    print("delete from memory");
+  }
+
+
+  void disposeAll(BuildContext context){
+    tagGlobal = tag;
+    dispose();
+    Navigator.of(context, rootNavigator: true).pop(context);
+  }
+
+  void callEmpty(){
+    print(tag);
   }
 }
+

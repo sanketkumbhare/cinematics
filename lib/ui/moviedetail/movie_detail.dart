@@ -9,9 +9,10 @@ import '../../commonui/text_widget.dart';
 class MovieDetail extends StatelessWidget {
   late MovieDetailController controller;
 
-
   MovieDetail({Key? key}) : super(key: key){
-     controller = Get.put(MovieDetailController(), tag: DateTime.now().millisecondsSinceEpoch.toString());
+     var tagValue =  DateTime.now().millisecondsSinceEpoch.toString();
+     controller = Get.put(MovieDetailController(), tag: tagValue);
+     controller.tag = tagValue;
   }
 
   @override
@@ -70,7 +71,7 @@ class MovieDetail extends StatelessWidget {
                     )),
                 leading: IconButton(
                   icon: const Icon(Icons.chevron_left),
-                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
+                  onPressed: () => controller.disposeAll(context),
                 ),
                 actions: [
                   Obx(() => controller.savedClicked.value == false

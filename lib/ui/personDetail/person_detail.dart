@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinematics/commonui/text_widget.dart';
 import 'package:cinematics/ui/personDetail/person_controller.dart';
@@ -10,7 +11,7 @@ import '../../appstrings/app_constants.dart';
 import '../../commonui/list_item_poster.dart';
 
 class PersonDetail extends StatelessWidget {
-   PersonDetail({Key? key}) : super(key: key);
+  PersonDetail({Key? key}) : super(key: key);
 
   final PersonController controller = Get.put(PersonController());
 
@@ -72,7 +73,8 @@ class PersonDetail extends StatelessWidget {
                     data: IconThemeData(color: Colors.white, size: 25),
                     child: Icon(Icons.arrow_back),
                   ),
-                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(context),
+                  onPressed: () =>
+                      Navigator.of(context, rootNavigator: true).pop(context),
                 ),
               ),
               Container(
@@ -111,61 +113,70 @@ class PersonDetail extends StatelessWidget {
                       direction: Axis.horizontal,
                       children: [
                         Expanded(
-                            child: Obx(() => ExpandableText("${controller.personDetail.value.biography}", expandText: "show more ..." , maxLines: 4,)))
+                            child: Obx(() => ExpandableText(
+                                  "${controller.personDetail.value.biography}",
+                                  expandText: "show more ...",
+                                  maxLines: 4,
+                                )))
                       ],
                     ),
                     SizedBox(
                       height: 20,
                       width: MediaQuery.of(context).size.width,
                     ),
-
                     Container(
                       width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.only(left: 2),
                       child: getTextWidget("Acted In Movies"),
                     ),
-
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.22,
                       child: Obx(
-                            () => ListView.builder(
+                        () => ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.movieList.length,
                           itemBuilder: (BuildContext context, int index) {
                             return listItemPosterMovies(
-                                context, controller.movieList[index].posterPath.toString());
+                                context,
+                                controller.movieList[index].posterPath
+                                    .toString());
                           },
                         ),
                       ),
                     ),
-
                     SizedBox(
                       height: 20,
                       width: MediaQuery.of(context).size.width,
                     ),
-
                     Container(
                       width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.only(left: 2),
                       child: getTextWidget("Acted In Tv Shows"),
                     ),
-
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.22,
                       child: Obx(
-                            () => ListView.builder(
+                        () => ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.tvList.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return listItemPosterMovies(
-                                context, controller.tvList[index].posterPath.toString());
+                            return GestureDetector(
+                              onTap: () => {
+                                controller.onTapItem.value = true,
+                                controller.detailTvScreenRoute(
+                                    controller.tvList[index], context)
+                              },
+                              child: listItemPosterMovies(
+                                  context,
+                                  controller.tvList[index].posterPath
+                                      .toString()),
+                            );
                           },
                         ),
                       ),
                     ),
                   ],
                 ),
-
               )
             ],
           ),
