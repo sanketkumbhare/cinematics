@@ -12,10 +12,11 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("TMDB guide"),
-        ),
-        body: Container(
+      appBar: AppBar(
+        title: const Text("TMDB guide"),
+      ),
+      body: Obx(
+        () => SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Stack(
@@ -24,39 +25,37 @@ class Search extends StatelessWidget {
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.06),
                 height: MediaQuery.of(context).size.height,
-                child: Obx(
-                  () => controller.isLoading.value == true &&
-                          controller.pageCount == 1
-                      ? const Center(child: CircularProgressIndicator())
-                      : ListView.builder(
-                          padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height * 0.1),
-                          key: PageStorageKey(controller.persistPosition),
-                          controller: controller.scrollController,
-                          scrollDirection: Axis.vertical,
-                          itemCount: controller.searchList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return InkWell(
-                              onTap: () {
-                                controller.onTap.value == true;
-                                print("tapped");
-                                controller.detailScreen(
-                                    controller.searchList[index], context);
-                              },
-                              child: listItems(
-                                  context,
-                                  controller.searchList[index].posterPath
-                                      .toString(),
-                                  controller.searchList[index].title == null
-                                      ? controller.searchList[index].name
-                                          .toString()
-                                      : controller.searchList[index].title
-                                          .toString(),
-                                  controller.searchList[index].overview
-                                      .toString()),
-                            );
-                          }),
-                ),
+                child: controller.isLoading.value == true &&
+                        controller.pageCount == 1
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height * 0.1),
+                        key: PageStorageKey(controller.persistPosition),
+                        controller: controller.scrollController,
+                        scrollDirection: Axis.vertical,
+                        itemCount: controller.searchList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: () {
+                              controller.onTap.value == true;
+                              print("tapped");
+                              controller.detailScreen(
+                                  controller.searchList[index], context);
+                            },
+                            child: listItems(
+                                context,
+                                controller.searchList[index].posterPath
+                                    .toString(),
+                                controller.searchList[index].title == null
+                                    ? controller.searchList[index].name
+                                        .toString()
+                                    : controller.searchList[index].title
+                                        .toString(),
+                                controller.searchList[index].overview
+                                    .toString()),
+                          );
+                        }),
               ),
               Container(
                 color: Colors.white,
@@ -72,18 +71,19 @@ class Search extends StatelessWidget {
                       hintText: "Search Movies, Tv shows, actors etc."),
                 ),
               ),
-              Obx(() =>
-                  controller.isLoading.value == true && controller.pageCount > 1
-                      ? const Align(
-                          alignment: Alignment.bottomCenter,
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: Center(child: CircularProgressIndicator()),
-                          ))
-                      : const Text(""))
+              controller.isLoading.value == true && controller.pageCount > 1
+                  ? const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Center(child: CircularProgressIndicator()),
+                      ))
+                  : const Text("")
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

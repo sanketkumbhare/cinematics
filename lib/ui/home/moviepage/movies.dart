@@ -8,15 +8,13 @@ import '../../../commonui/text_widget.dart';
 import 'movie_controller.dart';
 
 class Movies extends StatelessWidget {
-   Movies({Key? key}) : super(key: key);
+  Movies({Key? key}) : super(key: key);
 
   final MovieController movieController = Get.put(MovieController());
 
   @override
   Widget build(BuildContext context) {
-
-
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("TMDB guide"),
       ),
@@ -34,31 +32,28 @@ class Movies extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.27,
-                        child: Obx(
-                          () => ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            physics: const PageScrollPhysics(),
-                            itemCount:
-                                movieController.movieNowPlayingList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () => {
-                                  movieController.onTapItem.value = true,
-                                  movieController.detailScreenRoute(
-                                      movieController
-                                          .movieNowPlayingList[index],context)
-                                },
-                                child: listItemMovies(
-                                    context,
-                                    movieController
-                                        .movieNowPlayingList[index].backdropPath
-                                        .toString(),
-                                    movieController
-                                        .movieNowPlayingList[index].title
-                                        .toString()),
-                              );
-                            },
-                          ),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics: const PageScrollPhysics(),
+                          itemCount: movieController.movieNowPlayingList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () => {
+                                movieController.onTapItem.value = true,
+                                movieController.detailScreenRoute(
+                                    movieController.movieNowPlayingList[index],
+                                    context)
+                              },
+                              child: listItemMovies(
+                                  context,
+                                  movieController
+                                      .movieNowPlayingList[index].backdropPath
+                                      .toString(),
+                                  movieController
+                                      .movieNowPlayingList[index].title
+                                      .toString()),
+                            );
+                          },
                         ),
                       ),
                       SizedBox(
@@ -71,15 +66,14 @@ class Movies extends StatelessWidget {
                         child: getTextWidget(textPopularMovies),
                       ),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.22,
-                          child: Obx(
-                            () => horizontalPaginationWidget(
-                                context,
-                                movieController.moviePopularList,
-                                movieController.popularListOffset,
-                                movieController.controllerPopularMovies,
-                                movieController),
-                          )),
+                        height: MediaQuery.of(context).size.height * 0.22,
+                        child: horizontalPaginationWidget(
+                            context,
+                            movieController.moviePopularList,
+                            movieController.popularListOffset,
+                            movieController.controllerPopularMovies,
+                            movieController),
+                      ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 10,
@@ -91,12 +85,12 @@ class Movies extends StatelessWidget {
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.22,
-                        child: Obx(() => horizontalPaginationWidget(
+                        child: horizontalPaginationWidget(
                             context,
                             movieController.movieTopRatedList,
                             movieController.topMoviesListOffset,
                             movieController.controllerTopMovies,
-                            movieController)),
+                            movieController),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
@@ -109,14 +103,12 @@ class Movies extends StatelessWidget {
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.22,
-                        child: Obx(
-                          () => horizontalPaginationWidget(
-                              context,
-                              movieController.movieUpcomingList,
-                              movieController.upcomingMoviesListOffset,
-                              movieController.controllerUpcomingMovies,
-                              movieController),
-                        ),
+                        child: horizontalPaginationWidget(
+                            context,
+                            movieController.movieUpcomingList,
+                            movieController.upcomingMoviesListOffset,
+                            movieController.controllerUpcomingMovies,
+                            movieController),
                       ),
                     ],
                   ),

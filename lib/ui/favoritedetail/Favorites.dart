@@ -8,7 +8,6 @@ class FavoriteScreen extends StatelessWidget {
 
   FavoriteScreen({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +18,10 @@ class FavoriteScreen extends StatelessWidget {
           onTap: (index) => controller.onTapIndexValue(index),
           tabs: const [
             Tab(
-              child: Text("Movies", style: TextStyle(color: Colors.white),),
+              child: Text(
+                "Movies",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             Tab(
               child: Text("TV Show", style: TextStyle(color: Colors.white)),
@@ -27,19 +29,19 @@ class FavoriteScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: TabBarView(
-        controller: controller.tabController,
-        children: [
-          Center(child: Obx(() =>
-          controller.movieList.isNotEmpty
-              ? getMovieList(controller, "Movie")
-              : const Text("You have No favorite Movies"))),
-          Center(child: Obx(() =>
-          controller.tvList.isNotEmpty
-              ? getMovieList(controller, "Tv")
-              : const Text("You have No favorite Tv Shows"))),
-        ],
-      ),
+      body: Obx(() => TabBarView(
+            controller: controller.tabController,
+            children: [
+              Center(
+                  child: controller.movieList.isNotEmpty
+                      ? getMovieList(controller, "Movie")
+                      : const Text("You have No favorite Movies")),
+              Center(
+                  child: controller.tvList.isNotEmpty
+                      ? getMovieList(controller, "Tv")
+                      : const Text("You have No favorite Tv Shows")),
+            ],
+          )),
     );
   }
 }

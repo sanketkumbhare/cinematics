@@ -18,7 +18,6 @@ class HomeController extends GetxController {
     Future.delayed(const Duration(milliseconds: 100), () {
       if (value == 2) {
         Get.find<FavoriteController>().fetchData();
-        Get.find<MovieDetailController>(tag: tagGlobal).callEmpty();
       }
     });
 

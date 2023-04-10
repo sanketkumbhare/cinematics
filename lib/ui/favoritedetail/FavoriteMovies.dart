@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 
 Widget getMovieList(FavoriteController controller, String tabValue) {
-  return Obx(() => ListView.builder(
+  return  ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: tabValue == "Movie"
           ? controller.movieList.length
@@ -34,5 +34,5 @@ Widget getMovieList(FavoriteController controller, String tabValue) {
                   controller.tvList[index]!.name.toString(),
                   controller.tvList[index]!.overview.toString()),
             );
-      }));
+      });
 }
