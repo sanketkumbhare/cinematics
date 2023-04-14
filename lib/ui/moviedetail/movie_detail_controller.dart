@@ -1,19 +1,22 @@
 import 'package:cinematics/appstrings/app_constants.dart';
+import 'package:cinematics/db/realminit/initDb.dart';
 import 'package:cinematics/model/castResponse/Cast.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../apimodule/api_service.dart';
 import '../../db/MovieResultRealm.dart';
 import '../../util/app_routes.dart';
-import '../../util/util.dart';
 import '../personDetail/person_required_argument.dart';
 
 class MovieDetailController extends GetxController {
   late Results movieResult;
+
+  MovieDetailController(this.movieResult);
 
   final _similarMovieList = <Results>[].obs;
   final _castList = <Cast>[].obs;
@@ -21,7 +24,6 @@ class MovieDetailController extends GetxController {
   var onTapItem = false.obs;
   var savedClicked = false.obs;
   var movieItem = Results().obs;
-  var tag = "";
 
   List<Results> getSimilarMovieList() {
     return _similarMovieList;
@@ -36,8 +38,8 @@ class MovieDetailController extends GetxController {
   }
 
   void setArguments(BuildContext context) {
-    movieResult =   ModalRoute.of(context)?.settings.arguments as Results;
-    fetchAll(movieResult.id.toString());
+    //movieResult =   ModalRoute.of(context)?.settings.arguments as Results;
+
   }
 
   void fetchSimilarMovieList(String type, String movieId) async {
@@ -87,15 +89,19 @@ class MovieDetailController extends GetxController {
     launchUrl(Uri.parse(YOUTUBE_WATCH_BASE_URL + key.toString()));
   }
 
-  void routeToPersonDetail(Cast cast, Results movieResult,BuildContext context) {
+  void routeToPersonDetail(
+      Cast cast, Results movieResult, BuildContext context) {
     onTapItem.value = false;
-    Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.personDetail,arguments: RequiredArgumentPersonDetail(cast,movieResult,null));
+    context.pushNamed(AppRoutes.personDetail,
+        extra: RequiredArgumentPersonDetail(cast: cast,results: movieResult,tvResult: null).toJson());
+    //Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.personDetail,arguments: RequiredArgumentPersonDetail(cast,movieResult,null));
   }
 
-  void detailScreen(Results value,BuildContext context) {
+  void detailScreen(Results value, BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
+      //Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
+      context.pushNamed(AppRoutes.movieDetail, extra: value);
     }
   }
 
@@ -116,22 +122,17 @@ class MovieDetailController extends GetxController {
     addItem(movieResults);
   }
 
-@override
-  void dispose() {
-    super.dispose();
-    Get.delete<MovieDetailController>(tag: tag);
-    print("delete from memory");
+
+
+  void disposeAll(BuildContext context) {
+    disposeRealm();
+    Get.delete<MovieDetailController>(tag: movieResult.id.toString());
+    context.pop();
+    //Navigator.of(context, rootNavigator: true).pop(context);
   }
-
-
-  void disposeAll(BuildContext context){
-    tagGlobal = tag;
-    dispose();
-    Navigator.of(context, rootNavigator: true).pop(context);
-  }
-
-  void callEmpty(){
-    print(tag);
+  @override
+  void onInit() {
+    super.onInit();
+    fetchAll(movieResult.id.toString());
   }
 }
-

@@ -8,16 +8,12 @@ import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 
 class TvDetail extends StatelessWidget {
-  late TvDetailController controller;
+  final TvDetailController controller;
 
-  TvDetail({Key? key}) : super(key: key) {
-    controller = Get.put(TvDetailController(),
-        tag: DateTime.now().millisecondsSinceEpoch.toString());
-  }
+  const TvDetail({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller.getArguments(context);
     return MaterialApp(
       home: Scaffold(
         body: Obx(

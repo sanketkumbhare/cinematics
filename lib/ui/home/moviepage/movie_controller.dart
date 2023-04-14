@@ -2,6 +2,7 @@ import 'package:cinematics/apimodule/api_service.dart';
 import 'package:cinematics/ui/moviedetail/movie_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../appstrings/app_constants.dart';
 import '../../../model/movieResponse/Results.dart';
@@ -46,7 +47,8 @@ class MovieController extends GetxController {
   void detailScreenRoute(Results value,BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
+     // Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
+      context.pushNamed(AppRoutes.movieDetail,extra: value.toJson());
     }
   }
 

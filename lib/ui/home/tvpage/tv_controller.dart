@@ -5,6 +5,7 @@ import 'package:cinematics/ui/tvdetail/tv_detail.dart';
 import 'package:cinematics/util/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../apimodule/api_service.dart';
 
@@ -108,7 +109,8 @@ class TelevisionController extends GetxController {
   void detailScreenRoute(TvResult value,BuildContext context){
     if(onTapItem.value == true){
       onTapItem.value = false;
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
+      //Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
+      context.pushNamed(AppRoutes.tvDetail,extra: value.toJson());
     }
   }
 

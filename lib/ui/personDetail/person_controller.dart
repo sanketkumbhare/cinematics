@@ -14,7 +14,7 @@ import '../../apimodule/api_service.dart';
 import '../../util/util.dart';
 
 class PersonController extends GetxController {
-  late Cast cast;
+  late Cast? cast;
   late Results? results;
   late TvResult? tvResult;
 
@@ -22,6 +22,12 @@ class PersonController extends GetxController {
   var movieList = <ActedInMovies>[].obs;
   var tvList = <ActedInMovies>[].obs;
   var onTapItem = false.obs;
+
+  PersonController(RequiredArgumentPersonDetail personDetail){
+    cast = personDetail.cast;
+    results = personDetail.results;
+    tvResult = personDetail.tvResult;
+  }
 
   void fetchPersonDetail(String type, String movieId) async {
     try {
@@ -67,10 +73,10 @@ class PersonController extends GetxController {
     }
   }
 
-  void fetchData(String personId) {
-    fetchPersonDetail(person, personId);
-    fetchActedIn(movieCredits, personId);
-    fetchActedInTvShows(tvCredits, personId);
+  void fetchData(String? personId) {
+    fetchPersonDetail(person, personId.toString());
+    fetchActedIn(movieCredits, personId.toString());
+    fetchActedInTvShows(tvCredits, personId.toString());
   }
 
   void detailTvScreenRoute(ActedInMovies value, BuildContext context) {
@@ -93,12 +99,12 @@ class PersonController extends GetxController {
 
   void fetchAll(BuildContext context) {
     // cast = Get.arguments['cast'];
-    RequiredArgumentPersonDetail? personDetail = ModalRoute.of(context)
-        ?.settings
-        .arguments as RequiredArgumentPersonDetail;
-    cast = personDetail.cast!;
-    results = personDetail.results; //Get.arguments['movieResult'];
-    tvResult = personDetail.tvResult; //Get.arguments['tvResult'];
-    fetchData(cast.id.toString());
+    // RequiredArgumentPersonDetail? personDetail = ModalRoute.of(context)
+    //     ?.settings
+    //     .arguments as RequiredArgumentPersonDetail;
+    // cast = personDetail.cast!;
+    // results = personDetail.results; //Get.arguments['movieResult'];
+    // tvResult = personDetail.tvResult; //Get.arguments['tvResult'];
+    fetchData(cast?.id.toString());
   }
 }

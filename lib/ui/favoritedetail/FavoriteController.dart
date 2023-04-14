@@ -4,6 +4,7 @@ import 'package:cinematics/model/TvResponse/TvResult.dart';
 import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../db/TvResultRealm/TelevisionResultRealm.dart';
 import '../../util/app_routes.dart';
@@ -47,13 +48,13 @@ class FavoriteController extends GetxController with GetSingleTickerProviderStat
   void detailTvScreenRoute(TvResult value,BuildContext context){
     if(onTapItem.value == true){
       onTapItem.value = false;
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
+      context.pushNamed(AppRoutes.tvDetail,extra: value);
     }
   }
   void detailScreen(Results value, BuildContext context) {
     if (onTapItem.value == true) {
       onTapItem.value = false;
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: value);
+      context.pushNamed(AppRoutes.movieDetail,extra: value);
     }
   }
 

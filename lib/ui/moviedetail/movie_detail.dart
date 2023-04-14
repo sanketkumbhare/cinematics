@@ -1,3 +1,4 @@
+import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/ui/moviedetail/movie_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,13 +7,9 @@ import '../../commonui/list_item_poster.dart';
 import '../../commonui/text_widget.dart';
 
 class MovieDetail extends StatelessWidget {
-  late MovieDetailController controller;
+ final MovieDetailController controller;
 
-  MovieDetail({Key? key}) : super(key: key) {
-    var tagValue = DateTime.now().millisecondsSinceEpoch.toString();
-    controller = Get.put(MovieDetailController(), tag: tagValue);
-    controller.tag = tagValue;
-  }
+  MovieDetail({Key? key,required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

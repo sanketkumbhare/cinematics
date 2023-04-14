@@ -1,13 +1,10 @@
 import 'package:cinematics/model/searchresponse/SearchResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import '../../../apimodule/api_service.dart';
-import '../../../model/TvResponse/TvResult.dart';
-import '../../../model/movieResponse/Results.dart';
 import '../../../util/app_routes.dart';
 import '../../../util/util.dart';
-import '../../moviedetail/movie_detail.dart';
-import '../../tvdetail/tv_detail.dart';
 
 class SearchController extends GetxController {
   var textFieldValue = "".obs;
@@ -30,10 +27,8 @@ class SearchController extends GetxController {
       if (list!.isNotEmpty) {
         if (pageCount == 1) {
           searchList.value = list;
-          print("assigning");
         } else {
           searchList.addAll(list);
-          print("adding");
         }
 
       } else {
@@ -68,7 +63,7 @@ class SearchController extends GetxController {
 
   void detailScreen(SearchResult searchResult,BuildContext context) {
     if (searchResult.mediaType == MediaType.MOVIE) {
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.movieDetail,arguments: convertToMovieModel(searchResult));
+      context.pushNamed(AppRoutes.movieDetail,extra: convertToMovieModel(searchResult).toJson());
     }
     //   Get.to(MovieDetail(),
     //       arguments: convertToMovieModel(searchResult),
@@ -77,7 +72,7 @@ class SearchController extends GetxController {
     // }
 
     if (searchResult.mediaType == MediaType.TV) {
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: convertToTvModel(searchResult));
+      context.pushNamed(AppRoutes.tvDetail,extra: convertToTvModel(searchResult).toJson());
     }
   }
 

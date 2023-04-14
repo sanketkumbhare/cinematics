@@ -1,6 +1,8 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinematics/commonui/text_widget.dart';
+import 'package:cinematics/model/TvResponse/TvResult.dart';
+import 'package:cinematics/model/castResponse/Cast.dart';
+import 'package:cinematics/model/movieResponse/Results.dart';
 import 'package:cinematics/ui/personDetail/person_controller.dart';
 import 'package:cinematics/util/util.dart';
 import 'package:expandable_text/expandable_text.dart';
@@ -11,9 +13,9 @@ import '../../appstrings/app_constants.dart';
 import '../../commonui/list_item_poster.dart';
 
 class PersonDetail extends StatelessWidget {
-  PersonDetail({Key? key}) : super(key: key);
+  final PersonController controller;
 
-  final PersonController controller = Get.put(PersonController());
+  const PersonDetail({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class PersonDetail extends StatelessWidget {
                 ),
               ),
               Hero(
-                tag: "animate${controller.cast.id}",
+                tag: "animate${controller.cast?.id}",
                 child: Container(
                   alignment: Alignment.topLeft,
                   margin: EdgeInsets.only(
@@ -56,7 +58,7 @@ class PersonDetail extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.22,
                         fit: BoxFit.fill,
                         imageUrl:
-                            "$IMAGE_LOADING_BASE_URL_780${controller.cast.profilePath}",
+                            "$IMAGE_LOADING_BASE_URL_780${controller.cast?.profilePath}",
                         placeholder: (context, url) => const Icon(Icons.image),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.image),
@@ -86,7 +88,7 @@ class PersonDetail extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${controller.cast.originalName}",
+                            "${controller.cast?.originalName}",
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),

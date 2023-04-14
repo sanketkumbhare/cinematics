@@ -4,6 +4,7 @@ import 'package:cinematics/model/youtubeModel/youtubeResult.dart';
 import 'package:cinematics/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../apimodule/api_service.dart';
@@ -11,8 +12,11 @@ import '../../appstrings/app_constants.dart';
 import '../../model/castResponse/Cast.dart';
 import '../personDetail/person_required_argument.dart';
 
-class TvDetailController extends GetxController{
+class TvDetailController extends GetxController {
   late TvResult tvResult;
+
+  TvDetailController(this.tvResult);
+
   var castList = <Cast>[].obs;
   var youtubeList = <YoutubeResult>[].obs;
   var similarTvList = <TvResult>[].obs;
@@ -21,7 +25,7 @@ class TvDetailController extends GetxController{
 
   get controller => null;
 
-  void fetchCastList(String type, String movieId,String variant) async {
+  void fetchCastList(String type, String movieId, String variant) async {
     try {
       var list = await ApiService().getCastList(movieId, type, variant);
       if (list!.isNotEmpty) {
@@ -61,17 +65,20 @@ class TvDetailController extends GetxController{
     launchUrl(Uri.parse(YOUTUBE_WATCH_BASE_URL + key.toString()));
   }
 
-  void routeToPersonDetail(Cast cast, TvResult movieResult, BuildContext context) {
+  void routeToPersonDetail(
+      Cast cast, TvResult movieResult, BuildContext context) {
     onTapItem.value = false;
-   // var args = {"cast": cast, "tvResult": movieResult};
-    Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.personDetail,arguments: RequiredArgumentPersonDetail(cast,null,tvResult));
+    // var args = {"cast": cast, "tvResult": movieResult};
+    context.pushNamed(AppRoutes.personDetail,
+        extra: RequiredArgumentPersonDetail(
+            cast: cast, results: null, tvResult: movieResult).toJson());
   }
 
-  void addTv(TvResult tvResult){
+  void addTv(TvResult tvResult) {
     addFavoriteShow(tvResult);
   }
 
-  void getTvResult(String id){
+  void getTvResult(String id) {
     var item = getTvWIthId(int.parse(id));
     if (item != null) {
       savedClicked.value = true;
@@ -80,23 +87,25 @@ class TvDetailController extends GetxController{
     }
   }
 
-  void getArguments(BuildContext context){
-    tvResult = ModalRoute.of(context)?.settings.arguments as TvResult;
+
+  @override
+  void onInit() {
+    super.onInit();
     fetchAll(tvResult.id.toString());
   }
 
-  void fetchAll(String id){
+  void fetchAll(String id) {
     fetchSimilarTvList(similar, id);
     fetchYoutubeList(videos, id, tv);
     fetchCastList(credits, id, tv);
     getTvResult(id);
   }
 
-  void detailTvScreenRoute(TvResult value,BuildContext context){
-    if(onTapItem.value == true){
+  void detailTvScreenRoute(TvResult value, BuildContext context) {
+    if (onTapItem.value == true) {
       onTapItem.value = false;
-      Navigator.of(context, rootNavigator: true).pushNamed(AppRoutes.tvDetail,arguments: value);
+      context
+          .pushNamed(AppRoutes.tvDetail, extra: value.toJson());
     }
   }
-
 }
