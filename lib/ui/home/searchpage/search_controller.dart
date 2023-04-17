@@ -65,11 +65,6 @@ class SearchController extends GetxController {
     if (searchResult.mediaType == MediaType.MOVIE) {
       context.pushNamed(AppRoutes.movieDetail,extra: convertToMovieModel(searchResult).toJson());
     }
-    //   Get.to(MovieDetail(),
-    //       arguments: convertToMovieModel(searchResult),
-    //       fullscreenDialog: true,
-    //       preventDuplicates: false);
-    // }
 
     if (searchResult.mediaType == MediaType.TV) {
       context.pushNamed(AppRoutes.tvDetail,extra: convertToTvModel(searchResult).toJson());

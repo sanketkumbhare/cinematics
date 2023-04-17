@@ -19,17 +19,8 @@ import 'app_routes.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case AppRoutes.personDetail:
-      //   return MaterialPageRoute(
-      //       builder: (context) => PersonDetail(), settings: settings);
       case AppRoutes.home:
         return MaterialPageRoute(builder: (context) => Home());
-      // case AppRoutes.movieDetail:
-      //   return MaterialPageRoute(
-      //       builder: (context) => MovieDetail(), settings: settings);
-      // case AppRoutes.tvDetail:
-      //   return MaterialPageRoute(
-      //       builder: (context) => TvDetail(), settings: settings);
       case AppRoutes.splash:
         return MaterialPageRoute(builder: (context) => const SplashScreenApp());
       default:
