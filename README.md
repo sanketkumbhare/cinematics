@@ -96,8 +96,8 @@ buildscript {
 
 ### Flutter file directory for AAR
 
-Flutter module will get recognised only if it has proper directory 
-example:  file_name/build/host/outputs/repo/com/mobisoft/flutter_module/
+* Flutter module will get recognised only if it has proper directory 
+* example:  file_name/build/host/outputs/repo/com/mobisoft/flutter_module/
 ```tree
 build/host/outputs/repo
 └── com
