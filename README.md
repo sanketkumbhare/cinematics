@@ -51,6 +51,7 @@ buildscript {
 
 ## Kotlin DSL
 All the new Android projects mostly use Kotlin DSL
+
 a. Add the following code to app level build.gradle
 ```kotlin
 repositories{
